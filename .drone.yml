@@ -1,0 +1,23 @@
+---
+kind: pipeline
+type: kubernetes
+name: build
+
+trigger:
+  branch:
+  - master
+  - develop
+  - feature/*
+  event:
+  - push
+
+steps:
+- name: hello, world
+  image: golang:1.15.2-alpine3.12
+  commands:
+  - echo "Hello, World"
+  when:
+    branch:
+    - master
+    - develop
+    - feature/*
