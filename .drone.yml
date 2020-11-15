@@ -24,3 +24,6 @@ steps:
     - main
     - develop
     - feature/*
+    paths:
+      exclude:
+      - README.md
