@@ -10,9 +10,9 @@ trigger:
   - feature/*
   event:
   - push
-  #paths:
-  #  exclude:
-  #  - README.md
+  paths:
+    exclude:
+    - README.md
 
 steps:
 - name: hello, world
@@ -24,6 +24,19 @@ steps:
     - main
     - develop
     - feature/*
-    paths:
-      exclude:
-      - README.md
+    #paths:
+    #  exclude:
+    #  - README.md
+
+- name: docker
+  image: plugins/docker
+  settings:
+    registry: data-docker-registry.data-docker.svc.cluster.local:5000
+    repo: data-docker-registry.data-docker.svc.cluster.local:5000/test
+    tags:
+    - latest
+    - ${DRONE_COMMIT_SHA:0:8}
+    custom_labels:
+    - drone.commit-ref=${DRONE_COMMIT_REF}
+    - drone.commit-sha=${DRONE_COMMIT_SHA:0:8}
+    - drone.build-numner=${DRONE_BUILD_NUMBER}
