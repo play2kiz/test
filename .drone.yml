@@ -10,6 +10,9 @@ trigger:
   - feature/*
   event:
   - push
+  paths:
+    exclude:
+    - README.md
 
 steps:
 - name: hello, world
